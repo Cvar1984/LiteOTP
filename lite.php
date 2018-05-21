@@ -24,10 +24,8 @@ if(strtolower(substr(PHP_OS, 0, 3)) == 'win') {
     $ua = 'Mozilla/5.0 (Linux; Android 5.1.1; Andromax A16C3H Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.111 Mobile Safari/537.36';
     system('clear');
 }
-if(function_exists('pcntl_sugnal')) {
+if(function_exists('pcntl_signal')) {
 	declare(ticks = 1);
-	pcntl_signal(SIGTERM, "signal_handler");
-	pcntl_signal(SIGINT, "signal_handler");
 	function signal_handler($signal) {
 		global $Y,$X;
 		switch($signal) {
@@ -39,6 +37,8 @@ if(function_exists('pcntl_sugnal')) {
 		die($Y."\n=========================== Cvar1984 ))=====(@)>".$X."\n");
 		}
 	}
+	pcntl_signal(SIGTERM, "signal_handler");
+	pcntl_signal(SIGINT, "signal_handler");
 }
 function post_data($url,$data) {
 	global $ua;
@@ -62,7 +62,7 @@ echo $R."\n++++++++++++++++++++++++++++++++++++++";
 echo $B."\nAuthor  : Cvar1984                   ".$R.'+';
 echo $B."\nGithub  : https://github.com/Cvar1984".$R.'+';
 echo $B."\nTeam    : BlackHole Security         ".$R.'+';
-echo $B."\nVersion : 2.3                        ".$R.'+';
+echo $B."\nVersion : 2.4                        ".$R.'+';
 echo $B."\nDate    : 13-03-2018                 ".$R.'+';
 echo $R."\n++++++++++++++++++++++++++++++++++++++".$G.$X."\n\n";
 isset($argv[1]) OR die($RR."[!] Input No List [!]\n".$X);
