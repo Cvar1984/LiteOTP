@@ -24,18 +24,20 @@ if(strtolower(substr(PHP_OS, 0, 3)) == 'win') {
     $ua = 'Mozilla/5.0 (Linux; Android 5.1.1; Andromax A16C3H Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.111 Mobile Safari/537.36';
     system('clear');
 }
-declare(ticks = 1);
-@pcntl_signal(SIGTERM, "signal_handler");
-@pcntl_signal(SIGINT, "signal_handler");
-function signal_handler($signal) {
-	global $Y,$X;
-	switch($signal) {
+if(function_exists('pcntl_sugnal')) {
+	declare(ticks = 1);
+	pcntl_signal(SIGTERM, "signal_handler");
+	pcntl_signal(SIGINT, "signal_handler");
+	function signal_handler($signal) {
+		global $Y,$X;
+		switch($signal) {
 		case SIGTERM:
 		die($Y."\n=========================== Cvar1984 ))=====(@)>".$X."\n");
 		case SIGKILL:
 		die($Y."\n=========================== Cvar1984 ))=====(@)>".$X."\n");
 		case SIGINT:
 		die($Y."\n=========================== Cvar1984 ))=====(@)>".$X."\n");
+		}
 	}
 }
 function post_data($url,$data) {
