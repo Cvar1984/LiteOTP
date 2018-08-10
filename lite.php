@@ -1,5 +1,8 @@
 #!/usr/bin/env php
 <?php
+set_time_limit(0);
+ini_set('max_execution_time', 0);
+ini_set('memory_limit', '999999999M');
 if(strtolower(substr(PHP_OS, 0, 3)) == 'win') {
     $R  = "";
     $RR = "";
