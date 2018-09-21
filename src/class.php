@@ -15,7 +15,7 @@ class otp {
 		}
 	}
 
-	public function post($url,$data)
+	private function post($url,$data)
 	{
 		$ch=curl_init($url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
