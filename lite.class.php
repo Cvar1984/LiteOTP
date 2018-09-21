@@ -1,6 +1,5 @@
 <?php
 class otp {
-	public $no;
 	public $user_agent;
 
 	function __construct()
@@ -43,6 +42,10 @@ class otp {
 			elseif($argv == 'phd') {
 				return $this->post('https://www.phd.co.id/en/users/sendOTP','phone_number='.$no);
 			}
+		}
+		else {
+			fprintf(STDERR,"phone_number not numeric\n");
+			exit(-1);
 		}
 	}
 }

