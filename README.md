@@ -1,6 +1,6 @@
 # LiteOTP
 LiteOTP is a Simpe OTP API Client,
-powered BlackHoleSecurityr.
+powered By BlackHoleSecurity.
 
   - Simple to use
   - Easy to development
