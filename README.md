@@ -24,7 +24,8 @@ Install the dependencies and software.
 ```sh
 $ sudo apt install php php-curl wget
 $ sudo wget https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/main.phar -O /usr/local/bin/lite
-$ lite test_list.txt
+$ chmod +x /usr/local/bin/lite
+$ lite /foo/bar/test_list.txt
 ```
 
 For Android Termux environments
@@ -32,7 +33,8 @@ For Android Termux environments
 ```sh
 $ apt install php php-curl  wget
 $ wget https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/main.phar -O $PREFIX/bin/lite
-$ lite test_list.txt
+$ chmod +x $PREFIX/bin/lite
+$ lite /foo/bar/test_list.txt
 ```
 ### Exaxmple usage
 ```php
