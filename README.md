@@ -56,7 +56,7 @@ try {
 
 License
 ----
-> Copyright (C) 2019  <Cvar1984>
+> Copyright (C) Cvar1984, 2019
 >
 > This program is free software; you can redistribute it and/or
 > modify it under the terms of the GNU General Public License
