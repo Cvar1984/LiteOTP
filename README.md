@@ -39,9 +39,14 @@ $ lite /foo/bar/test_list.txt
 ### Exaxmple usage
 ```php
 // from root directory
-require 'src/class.php';
-$test=new otp();
-echo $test->otp('number_phone','api_server');
+require __DIR__.'/src/class.php';
+try {
+    $test=new Otp();
+    $test->sendOtp(trim('number_phone'),'api_server');
+    var_dump((array) $test);
+} catch(Exception $e) {
+    echo $e->xdebug_message;
+}
 ```
 
 ### Todo
@@ -51,7 +56,17 @@ echo $test->otp('number_phone','api_server');
 
 License
 ----
-
-MIT
-
-**Free Software, Hell Yeah!**
+> Copyright (C) 2019  <Cvar1984>
+>
+> This program is free software; you can redistribute it and/or
+> modify it under the terms of the GNU General Public License
+> as published by the Free Software Foundation; either version 2
+> of the License, or (at your option) any later version.
+>
+> This program is distributed in the hope that it will be useful,
+> but WITHOUT ANY WARRANTY; without even the implied warranty of
+> MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+> GNU General Public License for more details.
+>
+> You should have received a copy of the GNU General Public License
+> along with this program.  If not, see <http://www.gnu.org/licenses/>.
