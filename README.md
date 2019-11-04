@@ -1,11 +1,10 @@
 # LiteOTP
-LiteOTP is a Simpe OTP API Client,
-powered By BlackHoleSecurity.
+> LiteOTP is a Simpe OTP API Client,
 
   - Simple to use
   - Support PHP5
 
-### Installation
+## Installation
 
 requires [php](https://php.net ) to run.
 
