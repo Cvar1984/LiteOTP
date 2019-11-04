@@ -3,27 +3,18 @@ LiteOTP is a Simpe OTP API Client,
 powered By BlackHoleSecurity.
 
   - Simple to use
-  - Easy to development
   - Support PHP5
-
-### New Features!
-
-  - Use PHP Object Oriented Programming ( OOP )
-
-
-You can also:
-  - Run from mobile device like Android
-  - Run from Linux/UNIX or Windows
 
 ### Installation
 
-requires [php](https://php.net ) >= 5 to run.
+requires [php](https://php.net ) to run.
 
-Install the dependencies and software.
+### Install the dependencies and software.
+For Linux environments
 
 ```sh
-$ sudo apt install php php-curl wget
-$ sudo wget https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/main.phar -O /usr/local/bin/lite
+$ sudo apt install php php-curl
+$ sudo wget https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/main.phar --output /usr/local/bin/lite
 $ chmod +x /usr/local/bin/lite
 $ lite /foo/bar/test_list.txt
 ```
@@ -31,12 +22,12 @@ $ lite /foo/bar/test_list.txt
 For Android Termux environments
 
 ```sh
-$ apt install php php-curl  wget
-$ wget https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/main.phar -O $PREFIX/bin/lite
+$ apt install php curl
+$ curl https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/main.phar --output $PREFIX/bin/lite
 $ chmod +x $PREFIX/bin/lite
 $ lite /foo/bar/test_list.txt
 ```
-### Exaxmple usage
+### Exaxmple class usage
 ```php
 // from root directory
 require __DIR__.'/src/class.php';
@@ -52,7 +43,7 @@ try {
 ### Todo
 
  - Add more API
- - Support multi country
+ - Support international phone number
 
 License
 ----
