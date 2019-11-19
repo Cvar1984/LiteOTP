@@ -32,7 +32,9 @@ $ lite /foo/bar/test_list.txt
 require __DIR__.'/src/class.php';
 try {
     $test=new Otp();
-    $test->sendOtp(trim('number_phone'),'api_server');
+    $number_phone='+628xxxxxxxx';
+    $number_phone=trim($number_phone);
+    $test->sendOtp((int)$number_phone,'api_server');
     var_dump((array) $test);
 } catch(Exception $e) {
     echo $e->xdebug_message;
