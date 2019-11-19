@@ -57,7 +57,7 @@ class Otp  {
 
     public function sendOtp($no, $otp)
     {
-        if(isset($no) and is_numeric($no)) {
+        if(isset($no) and is_int($no)) {
             if($otp === 'tokopedia') {
                 return self::post('https://www.tokocash.com/oauth/otp','msisdn='.$no.'&accept=call');
             }
@@ -74,7 +74,7 @@ class Otp  {
             }
         }
         else {
-            throw new Exception('Phone_number not numeric');
+            throw new Exception('Phone_number not an integer');
         }
     }
 }
