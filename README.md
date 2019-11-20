@@ -12,8 +12,8 @@ requires [php](https://php.net ) to run.
 For Linux environments
 
 ```sh
-$ sudo apt install php php-curl
-$ sudo wget https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/main.phar --output /usr/local/bin/lite
+$ sudo apt install php php-curl curl
+$ sudo curl https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/main.phar --output /usr/local/bin/lite
 $ chmod +x /usr/local/bin/lite
 $ lite /foo/bar/test_list.txt
 ```
