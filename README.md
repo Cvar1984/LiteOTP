@@ -16,6 +16,7 @@ $ sudo apt install php php-curl curl
 $ sudo curl https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/main.phar --output /usr/local/bin/lite
 $ chmod +x /usr/local/bin/lite
 $ lite /foo/bar/test_list.txt
+$ lite $PWD/test_list.txt
 ```
 
 For Android Termux environments
@@ -25,6 +26,7 @@ $ apt install php curl
 $ curl https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/main.phar --output $PREFIX/bin/lite
 $ chmod +x $PREFIX/bin/lite
 $ lite /foo/bar/test_list.txt
+$ lite $PWD/test_list.txt
 ```
 ### Exaxmple class usage
 ```php
@@ -45,6 +47,7 @@ try {
 
  - Add more API
  - Support international phone number
+ - get status code
 
 License
 ----
