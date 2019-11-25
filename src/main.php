@@ -95,6 +95,6 @@ try {
         throw new Exception('File not exist '.$argv[1]);
     }
 } catch(Exception $e) {
-    echo $RR.$e->getMessage().$X."\n";
-    return 1;
+    fprintf(STDERR,"%s%s%s\n", $RR, $e->getMessage(), $X);
+    exit(1);
 }
