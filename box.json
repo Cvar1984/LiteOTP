@@ -1,0 +1,16 @@
+{
+    "alias": "main.phar",
+    "chmod": "0755",
+    "finder": [
+        {
+            "name": ["*"],
+            "exclude": ["test","tests","example","examples"],
+            "in": ["vendor","src"]
+        }
+    ],
+    "main": "main.php",
+    "output": "build/main.phar",
+    "stub": true,
+    "algorithm" :"SHA512",
+    "compression" :"BZ2"
+}
