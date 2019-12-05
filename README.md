@@ -31,7 +31,9 @@ $ lite $PWD/test_list.txt
 ### Exaxmple class usage
 ```php
 // from root directory
-require __DIR__.'/src/class.php';
+require __DIR__ . '/vendor/autoload.php';
+use Cvar1984\LiteOtp\Otp;
+
 try {
     $test=new Otp();
     $number_phone='+628xxxxxxxx';
