@@ -9,37 +9,30 @@
 requires [php](https://php.net ) to run.
 
 ### Install the dependencies and software.
-For Linux environments
 
 ```sh
-$ sudo apt install php php-curl curl
-$ sudo curl https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/main.phar --output /usr/local/bin/lite
-$ chmod +x /usr/local/bin/lite
-$ lite /foo/bar/test_list.txt
-$ lite $PWD/test_list.txt
+$ pkg install php -y
+$ php -a
+php > copy('https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/main.phar', 'main');
+php > chmod(0755, 'main');
+php > rename('main', $_SERVER['PREFIX'] . '/bin/lite');
+php > exit;
+$ lite +628xxxxx
+$ lite ./test_list.txt
 ```
 
-For Android Termux environments
-
-```sh
-$ apt install php curl
-$ curl https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/main.phar --output $PREFIX/bin/lite
-$ chmod +x $PREFIX/bin/lite
-$ lite /foo/bar/test_list.txt
-$ lite $PWD/test_list.txt
-```
 ### Exaxmple class usage
 ```php
-// from root directory
+<?php
+// test.php
 require __DIR__ . '/vendor/autoload.php';
 use Cvar1984\LiteOtp\Otp;
 
 try {
-    $test=new Otp();
-    $number_phone='+628xxxxxxxx';
-    $number_phone=trim($number_phone);
-    $test->sendOtp((int)$number_phone,'api_server');
-    var_dump((array) $test);
+    $numberPhone='+628xxxxxxxx';
+    Otp::tokopedia($numberPhone);
+    Otp::jdid($numberPhone);
+    Otp::phd($numberPhone);
 } catch(Exception $e) {
     echo $e->xdebug_message;
 }
