@@ -57,6 +57,7 @@ try {
             printf('%sSend OTP to %s[%s]%s%s', $G, $Y, $no, $X, PHP_EOL);
             Otp::jdid($no);
             Otp::phd($no);
+            Otp::pedulisehat($no);
         }
     } elseif (is_file($argv[1])) {
         $no = $argv[1];
@@ -78,6 +79,7 @@ try {
                 Otp::tokopedia($no[$x]);
                 Otp::jdid($no[$x]);
                 Otp::phd($no[$x]);
+                Otp::pedulisehat($no[$x]);
             }
         }
     } else {
