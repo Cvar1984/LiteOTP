@@ -1,9 +1,12 @@
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
+
 use Cvar1984\LiteOtp\Otp;
 
-if (strtolower(substr(PHP_OS, 0, 3)) == 'win') {
+$app = new Otp;
+
+if ($app->os != 'Linux') {
     $R = '';
     $RR = '';
     $G = '';
@@ -33,12 +36,13 @@ $Y _     _ _        ___ _____ ____
 |_____|_|\__\___|\___/ |_| |_|
 
 $R++++++++++++++++++++++++++++++++++++++
-$B Author  : Cvar1984                   $R
-$B Github  : https://github.com/Cvar1984$R
-$B Team    : BlackHole Security         $R
-$B Version : 2.0.7                      $R
-$B Date    : 13-03-2018                 $R
-$R++++++++++++++++++++++++++++++++++++++$G$X
+$B Author  :$G $app->author
+$B Github  :$G $app->github
+$B Team    :$G $app->team
+$B Version :$G $app->version
+$B Date    :$G $app->date
+$B OS      :$G $app->os
+$R++++++++++++++++++++++++++++++++++++++$X
 
 
 BANNER;
