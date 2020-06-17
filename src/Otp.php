@@ -2,16 +2,16 @@
 
 namespace Cvar1984\LiteOtp;
 
-class Otp extends Request
+final class Otp extends Request
 {
-    public $version = '2.0.8';
+    public $version = '2.0.9';
     public $os = PHP_OS;
     public $author = 'Cvar1984';
     public $team = 'BlackHole Security';
     public $date = '13-03-2018'; // date of birth
     public $github = 'https://github.com/Cvar1984';
 
-    public static function tokopedia(int $no) : string
+    public static function tokopedia(int $no, bool $verbose = false) : string
     {
         return self::request(
             'https://www.tokocash.com/oauth/otp',
@@ -19,10 +19,11 @@ class Otp extends Request
                 'msisdn' => $no,
                 'accept' => 'call'
             ],
-            'POST'
+            'POST',
+            $verbose
         );
     }
-    public static function jdid(int $no) : string
+    public static function jdid(int $no, bool $verbose = false) : string
     {
         return self::request(
             'https://sc.jd.id/phone/sendPhoneSms',
@@ -30,20 +31,22 @@ class Otp extends Request
                 'phone' => $no,
                 'smsType' => '1'
             ],
-            'POST'
+            'POST',
+            $verbose
         );
     }
-    public static function phd(int $no) : string
+    public static function phd(int $no, bool $verbose = false) : string
     {
         return self::request(
             'https://www.phd.co.id/en/users/sendOTP',
             [
                 'phone_number' => $no
             ],
-            'POST'
+            'POST',
+            $verbose
         );
     }
-    public static function pedulisehat(int $no) : string
+    public static function pedulisehat(int $no, bool $verbose = false) : string
     {
         return self::request(
             'https://passport.pedulisehat.id/v2/sms/captcha',
@@ -53,7 +56,8 @@ class Otp extends Request
                 'channel' => 'WhatsApp',
                 '_' => 1691007074597
             ],
-            'POST'
+            'POST',
+            $verbose
         );
     }
 }

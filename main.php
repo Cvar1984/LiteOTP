@@ -49,16 +49,14 @@ BANNER;
 
 try {
     if ($argc < 2) {
-        throw new Exception('Input No List');
+        throw new \RuntimeException('Please input number phone');
     }
 
     if (is_numeric($argv[1])) {
         $no = $argv[1];
-        printf('%sSend OTP to %s[%s]%s%s', $G, $Y, $no, $X, PHP_EOL);
-        Otp::tokopedia($no);
-
         while (1) {
             printf('%sSend OTP to %s[%s]%s%s', $G, $Y, $no, $X, PHP_EOL);
+            Otp::tokopedia($no);
             Otp::jdid($no);
             Otp::phd($no);
             Otp::pedulisehat($no);
@@ -72,14 +70,7 @@ try {
 
         while (1) {
             for ($x = 0; $x < $count; $x++) {
-                printf(
-                    '%sSend OTP to %s[%s]%s%s',
-                    $G,
-                    $Y,
-                    $no[$x],
-                    $X,
-                    PHP_EOL
-                );
+                printf('%sSend OTP to %s[%s]%s%s', $G, $Y, $no[$x], $X, PHP_EOL);
                 Otp::tokopedia($no[$x]);
                 Otp::jdid($no[$x]);
                 Otp::phd($no[$x]);
@@ -87,9 +78,9 @@ try {
             }
         }
     } else {
-        throw new Exception($argv[1] . ' Is not a file');
+        throw new \RuntimeException($argv[1] . ' Is not a file');
     }
-} catch (Exception $e) {
+} catch (\Exception | \RuntimeException $e) {
     fprintf(STDERR, "%s%s%s\n", $RR, $e->getMessage(), $X);
     exit(1);
 }

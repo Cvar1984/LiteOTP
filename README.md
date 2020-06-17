@@ -13,9 +13,9 @@ requires [php](https://php.net ) to run.
 ```sh
 $ pkg install php -y
 $ php -a
-php > copy('https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/main.phar', 'main');
-php > chmod(0755, 'main');
-php > rename('main', $_SERVER['PREFIX'] . '/bin/lite');
+php > copy('https://raw.githubusercontent.com/Cvar1984/LiteOTP/master/build/lite', 'lite');
+php > chmod(0755, 'lite');
+php > rename('lite', $_SERVER['PREFIX'] . '/bin/lite');
 php > exit;
 $ lite +628xxxxx
 $ lite ./test_list.txt
@@ -30,7 +30,7 @@ use Cvar1984\LiteOtp\Otp;
 
 try {
     $numberPhone='+628xxxxxxxx';
-    Otp::tokopedia($numberPhone);
+    Otp::tokopedia($numberPhone, true); // verbose
     Otp::jdid($numberPhone);
     Otp::phd($numberPhone);
 } catch(Exception $e) {
