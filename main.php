@@ -3,6 +3,8 @@
 require __DIR__ . '/vendor/autoload.php';
 
 use Cvar1984\LiteOtp\Otp;
+use Amp\Parallel\Worker;
+use Amp\Promise;
 
 $app = new Otp;
 
@@ -56,10 +58,28 @@ try {
         $no = $argv[1];
         while (1) {
             printf('%sSend OTP to %s[%s]%s%s', $G, $Y, $no, $X, PHP_EOL);
-            Otp::tokopedia($no);
-            Otp::jdid($no);
-            Otp::phd($no);
-            Otp::pedulisehat($no);
+            $promises[] = Worker\enqueueCallable(
+                '\\Cvar1984\\LiteOtp\\Otp::tokopedia',
+                $no
+            );
+            $promises[] = Worker\enqueueCallable(
+                '\\Cvar1984\\LiteOtp\\Otp::jdid',
+                $no
+            );
+            $promises[] = Worker\enqueueCallable(
+                '\\Cvar1984\\LiteOtp\\Otp::phd',
+                $no
+            );
+            $promises[] = Worker\enqueueCallable(
+                '\\Cvar1984\\LiteOtp\\Otp::pedulisehat',
+                $no
+            );
+            $responses = Promise\wait(Promise\all($promises));
+
+            /* foreach($responses as $key => $value) */
+            /* { */
+            /*     echo $value; */
+            /* } */
         }
     } elseif (is_file($argv[1])) {
         $no = $argv[1];
@@ -71,10 +91,23 @@ try {
         while (1) {
             for ($x = 0; $x < $count; $x++) {
                 printf('%sSend OTP to %s[%s]%s%s', $G, $Y, $no[$x], $X, PHP_EOL);
-                Otp::tokopedia($no[$x]);
-                Otp::jdid($no[$x]);
-                Otp::phd($no[$x]);
-                Otp::pedulisehat($no[$x]);
+                $promises[] = Worker\enqueueCallable(
+                    '\\Cvar1984\\LiteOtp\\Otp::tokopedia',
+                    $no[$x]
+                );
+                $promises[] = Worker\enqueueCallable(
+                    '\\Cvar1984\\LiteOtp\\Otp::jdid',
+                    $no[$x]
+                );
+                $promises[] = Worker\enqueueCallable(
+                    '\\Cvar1984\\LiteOtp\\Otp::phd',
+                    $no[$x]
+                );
+                $promises[] = Worker\enqueueCallable(
+                    '\\Cvar1984\\LiteOtp\\Otp::pedulisehat',
+                    $no[$x]
+                );
+                $responses = Promise\wait(Promise\all($promises));
             }
         }
     } else {

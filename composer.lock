@@ -4,55 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fd31a2813611af6f342de9069eaf3696",
+    "content-hash": "f529c3ad223f43105ec0a67b44c79281",
     "packages": [
-        {
-            "name": "campo/random-user-agent",
-            "version": "1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/joecampo/random-user-agent.git",
-                "reference": "4a88bd90f66ca398b050b19848e3c6ea143ce8a0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/joecampo/random-user-agent/zipball/4a88bd90f66ca398b050b19848e3c6ea143ce8a0",
-                "reference": "4a88bd90f66ca398b050b19848e3c6ea143ce8a0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Campo\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Joe Campo",
-                    "email": "jcampo@gmail.com"
-                }
-            ],
-            "description": "Generate real random user-agents.",
-            "keywords": [
-                "spoofing user",
-                "user agent",
-                "user agents",
-                "user-agent"
-            ],
-            "time": "2018-06-13T14:26:21+00:00"
-        }
-    ],
-    "packages-dev": [
         {
             "name": "amphp/amp",
             "version": "v2.4.4",
@@ -259,53 +212,6 @@
                 "multi-threading"
             ],
             "time": "2020-04-27T15:12:37+00:00"
-        },
-        {
-            "name": "amphp/parallel-functions",
-            "version": "v0.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/amphp/parallel-functions.git",
-                "reference": "12e6c602e067b02f78ddf5b720c17e9aa01ad4b4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/amphp/parallel-functions/zipball/12e6c602e067b02f78ddf5b720c17e9aa01ad4b4",
-                "reference": "12e6c602e067b02f78ddf5b720c17e9aa01ad4b4",
-                "shasum": ""
-            },
-            "require": {
-                "amphp/amp": "^2.0.3",
-                "amphp/parallel": "^0.1.8 || ^0.2 || ^1",
-                "opis/closure": "^3.0.7",
-                "php": ">=7"
-            },
-            "require-dev": {
-                "amphp/phpunit-util": "^1.0",
-                "friendsofphp/php-cs-fixer": "^2.9",
-                "phpunit/phpunit": "^6.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Amp\\ParallelFunctions\\": "src"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Niklas Keller",
-                    "email": "me@kelunik.com"
-                }
-            ],
-            "description": "Parallel processing made simple.",
-            "time": "2018-10-28T15:29:02+00:00"
         },
         {
             "name": "amphp/parser",
@@ -524,6 +430,100 @@
                 "synchronization"
             ],
             "time": "2020-05-07T18:57:50+00:00"
+        },
+        {
+            "name": "campo/random-user-agent",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joecampo/random-user-agent.git",
+                "reference": "4a88bd90f66ca398b050b19848e3c6ea143ce8a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joecampo/random-user-agent/zipball/4a88bd90f66ca398b050b19848e3c6ea143ce8a0",
+                "reference": "4a88bd90f66ca398b050b19848e3c6ea143ce8a0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Campo\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joe Campo",
+                    "email": "jcampo@gmail.com"
+                }
+            ],
+            "description": "Generate real random user-agents.",
+            "keywords": [
+                "spoofing user",
+                "user agent",
+                "user agents",
+                "user-agent"
+            ],
+            "time": "2018-06-13T14:26:21+00:00"
+        }
+    ],
+    "packages-dev": [
+        {
+            "name": "amphp/parallel-functions",
+            "version": "v0.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/parallel-functions.git",
+                "reference": "12e6c602e067b02f78ddf5b720c17e9aa01ad4b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/parallel-functions/zipball/12e6c602e067b02f78ddf5b720c17e9aa01ad4b4",
+                "reference": "12e6c602e067b02f78ddf5b720c17e9aa01ad4b4",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^2.0.3",
+                "amphp/parallel": "^0.1.8 || ^0.2 || ^1",
+                "opis/closure": "^3.0.7",
+                "php": ">=7"
+            },
+            "require-dev": {
+                "amphp/phpunit-util": "^1.0",
+                "friendsofphp/php-cs-fixer": "^2.9",
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\ParallelFunctions\\": "src"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                }
+            ],
+            "description": "Parallel processing made simple.",
+            "time": "2018-10-28T15:29:02+00:00"
         },
         {
             "name": "beberlei/assert",
