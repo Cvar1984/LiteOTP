@@ -2,7 +2,6 @@
 > LiteOTP is a Simpe OTP API Client,
 
   - Simple to use
-  - Support PHP5
 
 ## Installation
 
