@@ -6,7 +6,7 @@ use Cvar1984\LiteOtp\Otp;
 use Amp\Parallel\Worker;
 use Amp\Promise;
 
-$app = new Otp;
+$app = new Otp();
 
 if ($app->os != 'Linux') {
     $R = '';
@@ -50,70 +50,66 @@ $R++++++++++++++++++++++++++++++++++++++$X
 BANNER;
 
 try {
-    if ($argc < 2) {
-        throw new \RuntimeException('Please input number phone');
-    }
+    if ($argc < 2) throw new \InvalidArgumentException('Read README.md');
+
+    $providers = ['tokopedia', 'jdid', 'phd', 'pedulisehat'];
 
     if (is_numeric($argv[1])) {
-        $no = $argv[1];
+        $number = $argv[1];
         while (1) {
-            printf('%sSend OTP to %s[%s]%s%s', $G, $Y, $no, $X, PHP_EOL);
-            $promises[] = Worker\enqueueCallable(
-                '\\Cvar1984\\LiteOtp\\Otp::tokopedia',
-                $no
-            );
-            $promises[] = Worker\enqueueCallable(
-                '\\Cvar1984\\LiteOtp\\Otp::jdid',
-                $no
-            );
-            $promises[] = Worker\enqueueCallable(
-                '\\Cvar1984\\LiteOtp\\Otp::phd',
-                $no
-            );
-            $promises[] = Worker\enqueueCallable(
-                '\\Cvar1984\\LiteOtp\\Otp::pedulisehat',
-                $no
-            );
-            $responses = Promise\wait(Promise\all($promises));
-
-            /* foreach($responses as $key => $value) */
-            /* { */
-            /*     echo $value; */
-            /* } */
+            foreach ($providers as $provider) {
+                printf(
+                    '%sSend OTP to %s[%s]%s%s',
+                    $G,
+                    $Y,
+                    $number,
+                    $X,
+                    PHP_EOL
+                );
+                printf('%sProvider %s[%s]%s%s', $G, $Y, $provider, $X, PHP_EOL);
+                $promises[$provider] = Worker\enqueueCallable(
+                    '\Cvar1984\\LiteOtp\\Otp::' . $provider,
+                    $number
+                );
+                $responses = Promise\wait(Promise\all($promises));
+                /* foreach($responses as $key => $value) */
+                /* { */
+                /*     echo $value; */
+                /* } */
+            }
         }
-    } elseif (is_file($argv[1])) {
-        $no = $argv[1];
-        $no = file_get_contents($no);
-        $no = trim($no, " \t\n\r\0\x0B"); //remove whitespace
-        $no = explode(PHP_EOL, $no);
-        $count = sizeof($no);
+    }
 
-        while (1) {
-            for ($x = 0; $x < $count; $x++) {
-                printf('%sSend OTP to %s[%s]%s%s', $G, $Y, $no[$x], $X, PHP_EOL);
-                $promises[] = Worker\enqueueCallable(
-                    '\\Cvar1984\\LiteOtp\\Otp::tokopedia',
-                    $no[$x]
+    $fileName = $argv[1];
+
+    if (!is_file($fileName)) throw new \Exception($fileName . ' Is not a file');
+    if (!is_readable($fileName)) throw new \Exception('Permission denied');
+
+    $content = file_get_contents($fileName);
+    $content = trim($content, " \t\n\r\0\x0B"); //remove whitespace
+    $numbers = explode(PHP_EOL, $content);
+
+    while (1) {
+        foreach ($providers as $provider) {
+            foreach ($numbers as $index => $number) {
+                printf(
+                    '%sSend OTP to %s[%s]%s%s',
+                    $G,
+                    $Y,
+                    $number,
+                    $X,
+                    PHP_EOL
                 );
-                $promises[] = Worker\enqueueCallable(
-                    '\\Cvar1984\\LiteOtp\\Otp::jdid',
-                    $no[$x]
-                );
-                $promises[] = Worker\enqueueCallable(
-                    '\\Cvar1984\\LiteOtp\\Otp::phd',
-                    $no[$x]
-                );
-                $promises[] = Worker\enqueueCallable(
-                    '\\Cvar1984\\LiteOtp\\Otp::pedulisehat',
-                    $no[$x]
+                printf('%sProvider %s[%s]%s%s', $G, $Y, $provider, $X, PHP_EOL);
+                $promises[$index] = Worker\enqueueCallable(
+                    '\Cvar1984\\LiteOtp\\Otp::' . $provider,
+                    $number
                 );
                 $responses = Promise\wait(Promise\all($promises));
             }
         }
-    } else {
-        throw new \RuntimeException($argv[1] . ' Is not a file');
     }
-} catch (\Exception | \RuntimeException $e) {
+} catch (\Exception | \InvalidArgumentException $e) {
     fprintf(STDERR, "%s%s%s\n", $RR, $e->getMessage(), $X);
     exit(1);
 }

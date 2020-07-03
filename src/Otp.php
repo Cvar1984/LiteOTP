@@ -4,7 +4,7 @@ namespace Cvar1984\LiteOtp;
 
 final class Otp extends Request
 {
-    public $version = '2.1.0';
+    public $version = '2.1.1';
     public $os = PHP_OS;
     public $author = 'Cvar1984';
     public $team = 'BlackHole Security';

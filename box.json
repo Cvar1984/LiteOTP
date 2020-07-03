@@ -11,6 +11,6 @@
   "main": "main.php",
   "output": "build/lite",
   "stub": true,
-  "algorithm" :"SHA512",
-  "compression" :"BZ2"
+  "algorithm": "SHA512",
+  "compression": "GZ"
 }
