@@ -4,7 +4,7 @@ namespace Cvar1984\LiteOtp;
 
 abstract class Request
 {
-    final protected static function request(
+    public static function request(
         string $url,
         array $data,
         string $method = 'GET',

@@ -2,7 +2,9 @@
 
 namespace Cvar1984\LiteOtp;
 
-final class Otp extends Request
+use Cvar1984\LiteOtp\{Event, Request};
+
+final class Otp extends Event
 {
     public $version = '2.1.1';
     public $os = PHP_OS;
@@ -10,10 +12,12 @@ final class Otp extends Request
     public $team = 'BlackHole Security';
     public $date = '13-03-2018'; // date of birth
     public $github = 'https://github.com/Cvar1984';
+}
 
-    public static function tokopedia(int $no, bool $verbose = false) : string
+Otp::on('tokopedia',
+    function(int $no, bool $verbose = false) : string
     {
-        return self::request(
+        return Request::request(
             'https://www.tokocash.com/oauth/otp',
             [
                 'msisdn' => $no,
@@ -23,9 +27,11 @@ final class Otp extends Request
             $verbose
         );
     }
-    public static function jdid(int $no, bool $verbose = false) : string
+);
+Otp::on('jdid',
+    function(int $no, bool $verbose = false) : string
     {
-        return self::request(
+        return Request::request(
             'https://sc.jd.id/phone/sendPhoneSms',
             [
                 'phone' => $no,
@@ -35,9 +41,11 @@ final class Otp extends Request
             $verbose
         );
     }
-    public static function phd(int $no, bool $verbose = false) : string
+);
+Otp::on('phd',
+    function(int $no, bool $verbose = false) : string
     {
-        return self::request(
+        return Request::request(
             'https://www.phd.co.id/en/users/sendOTP',
             [
                 'phone_number' => $no
@@ -46,9 +54,11 @@ final class Otp extends Request
             $verbose
         );
     }
-    public static function pedulisehat(int $no, bool $verbose = false) : string
+);
+Otp::on('pedulisehat',
+    function(int $no, bool $verbose = false) : string
     {
-        return self::request(
+        return Request::request(
             'https://passport.pedulisehat.id/v2/sms/captcha',
             [
                 'mobile' => $no,
@@ -60,4 +70,4 @@ final class Otp extends Request
             $verbose
         );
     }
-}
+);

@@ -22,7 +22,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Cvar1984\\LiteOtp\\":"src/"
+      "Cvar1984\\":"src/"
     }
   },
   "require-dev": {

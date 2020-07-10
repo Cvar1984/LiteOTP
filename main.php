@@ -50,32 +50,39 @@ $R++++++++++++++++++++++++++++++++++++++$X
 BANNER;
 
 try {
-    if ($argc < 2) throw new \InvalidArgumentException('Read README.md');
+    if ($argc < 2) {
+        throw new \InvalidArgumentException('Read README.md');
+    }
 
     $providers = ['tokopedia', 'jdid', 'phd', 'pedulisehat'];
+    $number = $argv[1];
 
-    if (is_numeric($argv[1])) {
-        $number = $argv[1];
+    if (is_numeric($number)) {
         while (1) {
             foreach ($providers as $provider) {
-                printf(
-                    '%sSend OTP to %s[%s]%s%s',
-                    $G,
-                    $Y,
-                    $number,
-                    $X,
-                    PHP_EOL
-                );
-                printf('%sProvider %s[%s]%s%s', $G, $Y, $provider, $X, PHP_EOL);
                 $promises[$provider] = Worker\enqueueCallable(
-                    '\Cvar1984\\LiteOtp\\Otp::' . $provider,
+                    \Cvar1984\LiteOtp\Otp::call($provider,
                     $number
-                );
+                ));
                 $responses = Promise\wait(Promise\all($promises));
-                /* foreach($responses as $key => $value) */
-                /* { */
-                /*     echo $value; */
-                /* } */
+                foreach ($responses as $provider => $value) {
+                    printf(
+                        '%sSended OTP to %s[%s]%s%s',
+                        $G,
+                        $Y,
+                        $number,
+                        $X,
+                        PHP_EOL
+                    );
+                    printf(
+                        '%sProvider used %s[%s]%s%s',
+                        $G,
+                        $Y,
+                        $provider,
+                        $X,
+                        PHP_EOL
+                    );
+                }
             }
         }
     }
@@ -92,20 +99,31 @@ try {
     while (1) {
         foreach ($providers as $provider) {
             foreach ($numbers as $index => $number) {
-                printf(
-                    '%sSend OTP to %s[%s]%s%s',
-                    $G,
-                    $Y,
-                    $number,
-                    $X,
-                    PHP_EOL
-                );
-                printf('%sProvider %s[%s]%s%s', $G, $Y, $provider, $X, PHP_EOL);
                 $promises[$index] = Worker\enqueueCallable(
                     '\Cvar1984\\LiteOtp\\Otp::' . $provider,
                     $number
                 );
+
                 $responses = Promise\wait(Promise\all($promises));
+
+                foreach ($responses as $provider => $value) {
+                    printf(
+                        '%sSended OTP to %s[%s]%s%s',
+                        $G,
+                        $Y,
+                        $number,
+                        $X,
+                        PHP_EOL
+                    );
+                    printf(
+                        '%sProvider used %s[%s]%s%s',
+                        $G,
+                        $Y,
+                        $provider,
+                        $X,
+                        PHP_EOL
+                    );
+                }
             }
         }
     }
